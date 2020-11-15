@@ -1,0 +1,28 @@
+<%-  include  ('partials/_header');  -%>
+
+<div class="container">
+<div class="row">
+            <!-- FORM -->
+  <div class="col-md-5 offset-md-3">
+    <div class="card">
+        <div class="card-body">
+            <form action="/edit/<%= user._id %>" method="POST">
+                
+                <div class="form-group">
+                    <input type="text" name="firstname" placeholder="Insert a name" class="form-control" value="<%= user.firstname %>">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="lastname" placeholder="Insert a lastname" class="form-control" value="<%= user.lastname %>">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block"> Update user </button>
+
+            </form>
+        </div>
+    </div>
+</div>
+</div>  
+
+</div>
+
+<%-  include  ('partials/_footer');  -%>
