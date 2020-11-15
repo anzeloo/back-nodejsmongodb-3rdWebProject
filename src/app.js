@@ -1,19 +1,17 @@
 //ESTE ES EL SERVIDOR -> usar express e inicializarlo
-const path = require('path');
+var createError = require('http-errors');
 const express = require('express');
+const path = require('path');
+var cookieParser = require('cookie-parser');
 const morgan = require('morgan');
-const mongoose = require('mongoose');
+
+const db = require('../config/mongoose');
+
 const app = express();
 
-//connecting the db -> crud-mongo lo creamos desde aquí.
-//promesas -> para saber si se conectó (.then) o falló (.catch)
-mongoose.connect('mongodb://localhost/crud-mongo')
-.then(db => console.log('db connected'))
-.catch(err => console.log(err));
-
-
 //importing routes -> el enrutador
-const indexRoutes = require('./routes/index');
+const indexRoutes = require('./routes/index'); 
+const usersRoutes = require('./routes/users');
 
 //settings -> toma el puerto del SO
 app.set('port', process.env.PORT || 3000);
@@ -24,10 +22,14 @@ app.set('view engine', 'ejs')
 //aquí, usamos morgan para mostrarlos por consola
 //urlencoded -> entiende datos que inserta un user a través de un form. 
 app.use(morgan('dev')); 
+app.use(express.json());
 app.use(express.urlencoded({extended:false}));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
 //routes
 app.use('/', indexRoutes);
+app.use('/users', usersRoutes);
 
 //starting the server 
 app.listen(app.get('port') , () => {

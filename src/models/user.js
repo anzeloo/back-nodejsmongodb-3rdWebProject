@@ -3,28 +3,22 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
     name: {
-        firstname: String , 
-        lastname: String
+        firstname: {type: String, required: true}, 
+        lastname: {type: String, required: true}
         },
     username: {
-        type: String,
-        validate: {
-            validator: function(text) {
-                return text.length < 8;
-            },
-            message: 'Username must contain minimun 8 characters'
-            }
+        type: {type: String, required: true, min: 8},
         },
     identification: { 
-        type: String , 
-        number: Number
+        type: {type: String, required: true} , 
+        number: {type: Number, required: true}
         },
-    password: String,
-    photo: Buffer,
-    active: Boolean
-});
+    password: {type: String, required: true},
+    photo: {type: String, required: true},
+    active: {type: Boolean, required: true}
+    });
 
 
 //coge el schema y lo usa para guardar datos dentro de una colección mongodb
 //users -> nombre de la colección en la db
-module.exports = mongoose.model('users', UserSchema)
+module.exports = mongoose.model('User', UserSchema)
