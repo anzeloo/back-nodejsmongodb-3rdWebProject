@@ -10,7 +10,7 @@ const UserSchema = new Schema({
         type: String,
         validate: {
             validator: function(text) {
-                return text.size() < 8;
+                return text.length < 8;
             },
             message: 'Username must contain minimun 8 characters'
             }
