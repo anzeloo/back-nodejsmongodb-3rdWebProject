@@ -9,6 +9,13 @@ const db = require('../config/mongoose');
 
 const app = express();
 
+const cors = require('cors');
+var corsOptions = {
+    origin: '*',
+    optionsSuccessStatus:200
+}
+app.use(cors(corsOptions));
+
 //importing routes -> el enrutador
 const indexRoutes = require('./routes/index'); 
 const usersRoutes = require('./routes/users');
