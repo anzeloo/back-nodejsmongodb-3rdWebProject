@@ -10,6 +10,7 @@ exports.index = function(req, res, next) {
     })
 }
 
+//schema user
 exports.create = function(req, res, next) {
     let user = new User({
         name: {
